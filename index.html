@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classificação por Faixa Etária</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+            text-align: center;
+            background-color: rgb(125, 185, 219);
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        input[type="number"] {
+            padding: 5px;
+            margin-right: 10px;
+            width: 100px;
+        }
+        button {
+            padding: 5px 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        img {
+            max-width: 300px;
+            margin-top: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        table {
+            margin: 20px auto;
+            border-collapse: collapse;
+            width: 70%;
+            background-color: #c0f7bb;
+        }
+        table th, table td {
+            border: 1px solid #2c2a2a;
+            padding: 8px;
+            text-align: center;
+        }
+        table th {
+            background-color: #c0f7bb;
+        }
+        #resultado {
+            margin-top: 20px;
+        }
+        #mensagem {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Classificação por Faixa Etária</h1>
+    <p>Insira a sua idade para descobrir a sua faixa etária!</p>
+
+    <form id="faixa-etaria-form">
+        <input type="number" id="idade" name="idade" min="0" max="150" placeholder="Digite a sua idade" required>
+        <button type="button" onclick="calcularFaixaEtaria()">Enviar</button>
+    </form>
+
+    <div id="resultado">
+        <p id="mensagem"></p>
+        <img id="imagem-faixa-etaria" src="" alt="" style="display: none;">
+    </div>
+
+    <h2>Tabela de Referência</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Idade</th>
+                <th>Faixa Etária</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>0 - 2</td>
+                <td>Bebé</td>
+            </tr>
+            <tr>
+                <td>3 - 11</td>
+                <td>Criança</td>
+            </tr>
+            <tr>
+                <td>12 - 16</td>
+                <td>Adolescente</td>
+            </tr>
+            <tr>
+                <td>17 - 17</td>
+                <td>Jovem adulto</td>
+            </tr>
+            <tr>
+                <td>18 - 49</td>
+                <td>Adulto</td>
+            </tr>
+            <tr>
+                <td>50 - 65</td>
+                <td>Adulto de meia idade</td>
+            </tr>
+            <tr>
+                <td>66 - 100</td>
+                <td>Idoso</td>
+            </tr>
+            <tr>
+                <td>101 - 130</td>
+                <td>Lendário</td>
+            </tr>
+            <tr>
+                <td>131+</td>
+                <td>Imortal</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function calcularFaixaEtaria() {
+            const idade = parseInt(document.getElementById('idade').value);
+            const mensagem = document.getElementById('mensagem');
+            const imagem = document.getElementById('imagem-faixa-etaria');
+
+            if (isNaN(idade) || idade < 0 || idade > 150) {
+                mensagem.textContent = "Por favor, insira uma idade válida entre 0 e 150.";
+                imagem.style.display = "none";
+                return;
+            }
+
+            let faixaEtaria = "";
+            let imagemSrc = "";
+
+            if (idade <= 2) {
+                faixaEtaria = "Bebé";
+                imagemSrc = "bebe.avif";
+            } else if (idade < 12) {
+                faixaEtaria = "Criança";
+                imagemSrc = "crianca.webp";
+            } else if (idade <= 16) {
+                faixaEtaria = "Adolescente";
+                imagemSrc = "adolescente.webp";
+            } else if (idade < 18) {
+                faixaEtaria = "Jovem adulto";
+                imagemSrc = "jovem_adulto.webp";
+            } else if (idade < 50) {
+                faixaEtaria = "Adulto";
+                imagemSrc = "adulto.avif";
+            } else if (idade <= 65) {
+                faixaEtaria = "Adulto de meia idade";
+                imagemSrc = "adulto_meia_idade.avif";
+            } else if (idade <= 100) {
+                faixaEtaria = "Idoso";
+                imagemSrc = "idoso.avif";
+            } else if (idade <= 130) {
+                faixaEtaria = "Lendário";
+                imagemSrc = "lendario.jpg";
+            } else {
+                faixaEtaria = "Imortal";
+                imagemSrc = "imortal.webp";
+            }
+
+            mensagem.textContent = `Faixa etária: ${faixaEtaria}`;
+            imagem.src = imagemSrc;
+            imagem.alt = faixaEtaria;
+            imagem.style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
